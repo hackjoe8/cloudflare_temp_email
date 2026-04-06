@@ -1,0 +1,369 @@
+name = "cloudflare_temp_email"
+main = "src/worker.ts"
+compatibility_date = "2025-04-01"
+compatibility_flags = [ "nodejs_compat" ]
+keep_vars = true
+
+# 如果你想使用自定义域名（custom_domain），你需要额外添加 routes 路由配置
+# routes = [
+# 	{ pattern = "temp-email-api.xxxxx.xyz", custom_domain = true },
+# ]
+
+# 如果你想在部署 Worker 的同时一起部署前端静态资源，则需要添加 assets 配置
+# [assets]
+# directory = "../frontend/dist/"
+# binding = "ASSETS"
+# run_worker_first = true
+
+# 如果你想开启定时自动清理功能，可以启用 cron 定时任务
+# [triggers]
+# crons = [ "0 0 * * *" ]
+
+# 邮件发送功能绑定配置
+# send_email = [
+#    { name = "SEND_MAIL" },
+# ]
+
+[vars]
+# DEFAULT_LANG = "zh"
+# 默认语言，设置后系统默认使用这个语言
+
+# TITLE = "Custom Title"
+# 自定义网站标题
+
+# ANNOUNCEMENT = "Custom Announcement"
+# 自定义公告内容
+
+# ALWAYS_SHOW_ANNOUNCEMENT = true
+# 即使公告内容没有变化，也始终显示公告
+
+PREFIX = "tmp"
+
+# ADDRESS_CHECK_REGEX = "^(?!.*admin).*"
+# 邮箱地址名称的校验正则
+# 如果不设置，则不会对地址名称做额外校验
+# 例如这个规则表示：地址中不能包含 admin
+
+# ADDRESS_REGEX = "[^a-z0-9]"
+# 邮箱地址名称替换用的正则
+# 如果不设置，则默认使用 [^a-z0-9]
+# 也就是默认会处理掉非小写字母和数字的字符
+
+# MIN_ADDRESS_LEN = 1
+# 邮箱地址名称的最小长度
+# 如果不设置，则默认最小长度为 1
+
+# MAX_ADDRESS_LEN = 30
+# 邮箱地址名称的最大长度
+# 如果不设置，则默认最大长度为 30
+
+# DISABLE_CUSTOM_ADDRESS_NAME = true
+# 禁止用户自定义邮箱名称
+# 如果设为 true，用户将不能手动输入邮箱前缀，系统会自动随机生成
+
+# IF YOU WANT TO MAKE YOUR SITE PRIVATE, UNCOMMENT THE FOLLOWING LINES
+# 如果你想把站点改成私有站点，请取消注释下面这些配置
+
+# PASSWORDS = ["123", "456"]
+# 站点访问密码列表
+# 只有输入这些密码的用户才能访问或使用系统
+
+# For admin panel
+# 以下是后台管理面板相关配置
+
+# ADMIN_PASSWORDS = ["123", "456"]
+# 管理后台的密码列表
+
+# warning: no password or user check for admin portal
+# 警告：当前管理员入口可能没有做用户身份或密码校验，请注意安全风险
+
+# DISABLE_ADMIN_PASSWORD_CHECK = false
+# 是否禁用管理员后台密码检查
+# false 表示仍然检查密码
+# true 表示不检查，任何人可能都能直接进入后台，非常危险
+
+# ADMIN CONTACT, CAN BE ANY STRING
+# 管理员联系方式，可以填写任意字符串
+
+# ADMIN_CONTACT = "xx@xx.xxx"
+# 管理员联系信息示例
+
+# Create new address with default domain first, if set true, will use first domain from DEFAULT_DOMAINS when no domain specified
+# 创建新邮箱地址时，优先使用默认域名
+# 如果设为 true，当用户没有指定域名时，会自动使用 DEFAULT_DOMAINS 里的第一个域名
+
+# CREATE_ADDRESS_DEFAULT_DOMAIN_FIRST = false
+
+DEFAULT_DOMAINS = ["xxx.xxx1" , "xxx.xxx2"] # 默认域名列表，供普通角色用户使用
+DOMAINS = ["xxx.xxx1" , "xxx.xxx2"] # 全部可用域名列表
+
+# Allow /api/new_address and /admin/new_address to accept subdomains that end with an allowed base domain
+# 允许 /api/new_address 和 /admin/new_address 接口接受“以允许的主域名结尾”的子域名
+
+# e.g. if DOMAINS contains "abc.com", API can accept "team.abc.com" and "dev.team.abc.com"
+# 例如：如果 DOMAINS 中包含 abc.com
+# 那么接口也可以接受 team.abc.com 和 dev.team.abc.com 这样的多级子域名
+
+# ENABLE_CREATE_ADDRESS_SUBDOMAIN_MATCH = true
+
+# Allow optional random subdomain generation for the listed base domains
+# 允许对指定主域名启用“随机子域名”功能
+
+# e.g. name@abc.com => name@r4nd0m.abc.com
+# 例如：name@abc.com 可以自动变成 name@随机字符串.abc.com
+
+# RANDOM_SUBDOMAIN_DOMAINS = ["abc.com"]
+# 允许生成随机子域名的主域名列表
+
+# RANDOM_SUBDOMAIN_LENGTH = 8
+# 随机子域名的长度
+
+# For chinese domain name, you can use DOMAIN_LABELS to show chinese domain name
+# 如果你有中文域名，可以通过 DOMAIN_LABELS 来显示中文域名名称
+
+# DOMAIN_LABELS = ["中文.xxx", "xxx.xxx2"]
+
+# USER_DEFAULT_ROLE = "vip"
+# 新用户默认角色
+# 仅在启用了邮件验证功能时生效
+
+# ADMIN_USER_ROLE = "admin"
+# 哪个角色被视为管理员角色，拥有后台访问权限
+
+# User roles configuration, if domains is empty will use default_domains, if prefix is null will use default prefix, if prefix is empty string will not use prefix
+# 用户角色配置说明：
+# - 如果 domains 为空，则使用 default_domains
+# - 如果 prefix 为 null，则使用默认前缀
+# - 如果 prefix 为空字符串 ""，则表示不使用前缀
+
+# USER_ROLES = [
+#    { domains = ["xxx.xxx1" , "xxx.xxx2"], role = "vip", prefix = "vip" },
+#    { domains = ["xxx.xxx1" , "xxx.xxx2"], role = "admin", prefix = "" },
+# ]
+
+JWT_SECRET = "xxx"
+BLACK_LIST = ""
+
+# Allow users to create email addresses
+# 是否允许用户创建邮箱地址
+ENABLE_USER_CREATE_EMAIL = true
+
+# Disable anonymous user create email, if set true, users can only create email addresses after logging in
+# 禁止匿名用户创建邮箱地址
+# 如果设为 true，则用户必须先登录，登录后才能创建邮箱地址
+
+# DISABLE_ANONYMOUS_USER_CREATE_EMAIL = true
+
+# Allow users to delete messages
+# 是否允许用户删除邮件
+ENABLE_USER_DELETE_EMAIL = true
+
+# Allow automatic replies to emails
+# 是否允许邮件自动回复功能
+ENABLE_AUTO_REPLY = false
+
+# Allow webhook
+# 是否启用 Webhook 功能
+# ENABLE_WEBHOOK = true
+
+# Enable address password feature, if set true, will generate password for new address and support password login and change
+# 启用邮箱地址密码功能
+# 如果设为 true，系统会为新邮箱地址生成独立密码
+# 并支持通过该密码登录以及后续修改密码
+
+# ENABLE_ADDRESS_PASSWORD = false
+
+# Footer text
+# 页脚显示的文本内容
+
+# COPYRIGHT = "Dream Hunter"
+
+# DISABLE_SHOW_GITHUB = true
+# 是否隐藏 GitHub 链接或相关展示
+
+# Status monitoring page URL
+# 状态监控页面地址
+
+# STATUS_URL = "https://status.example.com"
+
+# default send balance, if not set, it will be 0
+# 默认发送余额
+# 如果不设置，则默认值为 0
+
+# DEFAULT_SEND_BALANCE = 1
+
+# the role which can send emails without limit, multiple roles can be separated by ,
+# 哪些角色可以无限制发送邮件
+# 如果有多个角色，可以用英文逗号分隔
+
+# NO_LIMIT_SEND_ROLE = "vip"
+
+# Turnstile verification
+# Cloudflare Turnstile 人机验证配置
+
+# CF_TURNSTILE_SITE_KEY = ""
+# Turnstile 前端站点密钥
+
+# CF_TURNSTILE_SECRET_KEY = ""
+# Turnstile 后端密钥
+
+# Enable global Turnstile check for all login forms (requires Turnstile keys above)
+# 是否为所有登录表单启用全局 Turnstile 校验
+# 启用前需要先配置上面的 Turnstile 密钥
+
+# ENABLE_GLOBAL_TURNSTILE_CHECK = true
+
+# telegram bot
+# Telegram 机器人相关配置
+
+# TG_MAX_ADDRESS = 5
+# Telegram 用户可创建的最大邮箱地址数量
+
+# telegram bot info, predefined bot info can reduce latency of the webhook
+# Telegram 机器人信息
+# 如果预先写入 bot 信息，可以减少 webhook 的响应延迟
+
+# TG_BOT_INFO = "{}"
+
+# allow user to switch language via /lang command
+# 是否允许用户通过 /lang 命令切换语言
+
+# TG_ALLOW_USER_LANG = true
+
+# enable sending email attachments via Telegram push (50MB per file limit)
+# 是否允许通过 Telegram 推送邮件附件
+# 单个附件大小限制为 50MB
+
+# ENABLE_TG_PUSH_ATTACHMENT = true
+
+# global forward address list, if set, all emails will be forwarded to these addresses
+# 全局邮件转发地址列表
+# 如果设置了，所有收到的邮件都会自动转发到这些地址
+
+# FORWARD_ADDRESS_LIST = ["xxx@xxx.com"]
+
+# subdomain forward address list, if set, subdomain emails will be forwarded to these addresses
+# 子域名邮件转发规则列表
+# 如果设置了，不同子域名收到的邮件会转发到对应地址
+
+# SUBDOMAIN_FORWARD_ADDRESS_LIST = """
+# [
+#     {"domains":[""],"forward":"xxx1@xxx.com"},
+#     {"domains":["subdomain-1.domain.com","subdomain-2.domain.com"],"forward":"xxx2@xxx.com"}
+# ]
+# """
+
+# Frontend URL
+# 前端页面地址
+
+# FRONTEND_URL = "https://xxxx.xxx"
+
+# Enable check junk mail
+# 是否启用垃圾邮件检查功能
+
+# ENABLE_CHECK_JUNK_MAIL = false
+
+# junk mail check list, if status exists and status is not pass, will be marked as junk mail
+# 垃圾邮件检测项目列表
+# 如果这些检查项存在，并且检查结果不是 pass，则邮件会被标记为垃圾邮件
+
+# JUNK_MAIL_CHECK_LIST = = ["spf", "dkim", "dmarc"]
+
+# junk mail force check pass list, if no status or status is not pass, will be marked as junk mail
+# 垃圾邮件强制通过检查列表
+# 如果这些项目没有状态，或者状态不是 pass，则邮件会被标记为垃圾邮件
+
+# JUNK_MAIL_FORCE_PASS_LIST = ["spf", "dkim", "dmarc"]
+
+# remove attachment if size exceed 2MB, mail maybe mising some information due to parsing
+# 如果附件大小超过 2MB，则移除附件
+# 由于解析时去掉了附件，邮件内容可能会丢失一部分信息
+
+# REMOVE_EXCEED_SIZE_ATTACHMENT = true
+
+# remove all attachment, mail maybe mising some information due to parsing
+# 移除所有附件
+# 这样做可能会导致邮件解析后缺失部分内容信息
+
+# REMOVE_ALL_ATTACHMENT = true
+
+# enable gzip compressed email storage in raw_blob column (run db_migration first)
+# 启用 gzip 压缩方式存储邮件原始内容到 raw_blob 字段
+# 开启前需要先执行数据库迁移（db_migration）
+
+# ENABLE_MAIL_GZIP = true
+
+# AI email extraction, automatically extract verification codes, auth links, etc.
+# AI 邮件内容提取功能
+# 可自动从邮件中提取验证码、认证链接、激活链接等关键信息
+
+# ENABLE_AI_EMAIL_EXTRACT = true
+
+# AI model name, choose from https://developers.cloudflare.com/workers-ai/models/#text-generation
+# AI 模型名称
+# 从 Cloudflare Workers AI 支持的文本生成模型中选择一个
+
+# AI_EXTRACT_MODEL = "@cf/meta/llama-3.1-8b-instruct"
+
+# Calling other woker to process email
+# 调用其他 Worker 来进一步处理邮件内容
+
+# ENABLE_ANOTHER_WORKER = false
+
+# ANOTHER_WORKER_LIST = """
+# [
+#    {
+#        "binding":"AUTH_INBOX",
+#        "method":"rpcEmail",
+#        "keywords":[
+#            "验证码","激活码","激活链接","确认链接","验证邮箱","确认邮件","账号激活","邮件验证","账户确认","安全码","认证码","安全验证","登陆码","确认码","启用账户","激活账户","账号验证","注册确认",
+#            "account","activation","verify","verification","activate","confirmation","email","code","validate","registration","login","code","expire","confirm"
+#        ]
+#    }
+# ]
+# """
+# 这部分表示：
+# - 绑定一个名为 AUTH_INBOX 的 Worker 服务
+# - 调用它的 rpcEmail 方法
+# - 当邮件内容中命中 keywords 这些关键词时，就交给对应 Worker 处理
+# 常用于验证码、激活链接、确认邮件等自动识别和自动分流
+
+[[d1_databases]]
+binding = "DB"
+database_name = "xxx"
+database_id = "xxx"
+
+# Workers AI binding (required for AI email extraction)
+# Workers AI 绑定配置
+# 如果要启用 AI 邮件提取功能，这是必须配置的
+
+# [ai]
+# binding = "AI"
+
+# kv config for send email verification code
+# 用于发送邮箱验证码的 KV 存储配置
+
+# [[kv_namespaces]]
+# binding = "KV"
+# id = "xxxx"
+
+# ratelimit config for /api/new_address
+# /api/new_address 接口的限流配置
+
+# [[unsafe.bindings]]
+# name = "RATE_LIMITER"
+# type = "ratelimit"
+# namespace_id = "1001"
+
+# 10 requests per minute
+# 每分钟允许 10 次请求
+
+# simple = { limit = 10, period = 60 }
+
+# binding another worker service (parse the code or link), e.g. auth-inbox
+# 绑定另一个 Worker 服务
+# 用来解析验证码、链接等内容，例如 auth-inbox 这样的服务
+
+# [[services]]
+# binding = "AUTH_INBOX"
+# service = "auth-inbox"
