@@ -16,8 +16,8 @@ keep_vars = true
 # run_worker_first = true
 
 # 如果你想开启定时自动清理功能，可以启用 cron 定时任务
-# [triggers]
-# crons = [ "0 0 * * *" ]
+[triggers]
+crons = [ "0 0 * * *" ]
 
 # 邮件发送功能绑定配置
 # send_email = [
@@ -37,7 +37,7 @@ keep_vars = true
 # ALWAYS_SHOW_ANNOUNCEMENT = true
 # 即使公告内容没有变化，也始终显示公告
 
-PREFIX = "tmp"
+PREFIX = ""
 
 # ADDRESS_CHECK_REGEX = "^(?!.*admin).*"
 # 邮箱地址名称的校验正则
@@ -71,7 +71,7 @@ PREFIX = "tmp"
 # For admin panel
 # 以下是后台管理面板相关配置
 
-# ADMIN_PASSWORDS = ["123", "456"]
+# ADMIN_PASSWORDS = ["joe592333."]
 # 管理后台的密码列表
 
 # warning: no password or user check for admin portal
@@ -94,8 +94,8 @@ PREFIX = "tmp"
 
 # CREATE_ADDRESS_DEFAULT_DOMAIN_FIRST = false
 
-DEFAULT_DOMAINS = ["xxx.xxx1" , "xxx.xxx2"] # 默认域名列表，供普通角色用户使用
-DOMAINS = ["xxx.xxx1" , "xxx.xxx2"] # 全部可用域名列表
+DEFAULT_DOMAINS = ["smz6.com" , "xxx.xxx2"] # 默认域名列表，供普通角色用户使用
+DOMAINS = ["smz6.com" , "xxx.xxx2"] # 全部可用域名列表
 
 # Allow /api/new_address and /admin/new_address to accept subdomains that end with an allowed base domain
 # 允许 /api/new_address 和 /admin/new_address 接口接受“以允许的主域名结尾”的子域名
@@ -141,7 +141,7 @@ DOMAINS = ["xxx.xxx1" , "xxx.xxx2"] # 全部可用域名列表
 #    { domains = ["xxx.xxx1" , "xxx.xxx2"], role = "admin", prefix = "" },
 # ]
 
-JWT_SECRET = "xxx"
+JWT_SECRET = "dskl54saajgewrjoiu23904823u4t5-3r2o3i4u5"
 BLACK_LIST = ""
 
 # Allow users to create email addresses
@@ -330,8 +330,8 @@ ENABLE_AUTO_REPLY = false
 
 [[d1_databases]]
 binding = "DB"
-database_name = "xxx"
-database_id = "xxx"
+database_name = "mail-db"
+database_id = "a4f6e0f3-1854-42f4-8eaf-8948d28f3802"
 
 # Workers AI binding (required for AI email extraction)
 # Workers AI 绑定配置
